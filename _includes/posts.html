@@ -5,7 +5,7 @@
         <h4 class="text-capitalize">{{ post.title }}</h4>
         <hr>
         <div class="post-content-preview font-italic">
-          <p>{{ post.content | strip_html | truncate:300 }}</p>
+          <p>{{ post.content | strip_html | truncate:200 | newline_to_br }}</p>
         </div>
         <p class="text-info text-sm-right font-weight-light font-italic">
           Posted by {% if post.author %}{{ post.author }}{% else %}{{ site.author }}{% endif %} on {{ post.date | date: "%B %-d, %Y" }}
