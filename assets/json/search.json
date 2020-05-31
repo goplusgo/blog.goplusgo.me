@@ -1,0 +1,15 @@
+---
+---
+[
+  {% for post in site.posts %}
+    {
+      "title"    : "{{ post.title | escape }}",
+      "subtitle" : "{{ post.subtitle }}",
+      "url"      : "{{ site.baseurl }}{{ post.url }}",
+      "tags"     : "{{ post.tags | join: ', ' }}",
+      "date"     : "{{ post.date }}",
+      "summary"  : "{{ post.summary }}",
+      "content"  : "{{ post.content | strip_html | strip_newlines | escape }}"
+    } {% unless forloop.last %},{% endunless %}
+  {% endfor %}
+]

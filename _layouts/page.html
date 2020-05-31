@@ -1,0 +1,25 @@
+---
+layout: default
+comments: true
+---
+
+<section id="main" class="py-5">
+  <div class="container ">
+    <div class="row">
+      <! Posts container -->
+      <div class="col col-lg-8 col-md-8 col-sm-12 col-xs-12">
+        <div class="row rounded bg-light mx-3 p-3">
+          {% include posts.html %}
+        </div>
+        <div class="row mx-3 p-3">
+          {% include pagination.html %}
+        </div>
+      </div>
+      <! Sidebar container -->
+      <div class="col align-self-start rounded bg-light mx-3 p-3 col-lg-3 col-md-3 d-none d-md-block">
+         {% include sidebar.html %}
+      </div>
+    </div>
+  </div>
+</section>
+

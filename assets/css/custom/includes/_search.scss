@@ -1,0 +1,17 @@
+#search {
+	color: $primary;
+	ul {
+		padding-left: 20px !important;
+		li {
+		  a {
+			text-decoration: none;
+			&.hover {
+				color: $info;
+			}
+          }
+		}
+	}
+	#results-container {
+		margin-top: 10px;
+	}
+}

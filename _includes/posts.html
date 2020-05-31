@@ -1,0 +1,16 @@
+<section id="posts">
+  {% for post in paginator.posts %}
+    <div class="post-section">
+      <a href="{{ post.url | prepend: site.baseurl }}">
+        <h4 class="text-capitalize">{{ post.title }}</h4>
+        <hr>
+        <div class="post-content-preview font-italic">
+          <p>{{ post.content | strip_html | truncate:300 }}</p>
+        </div>
+        <p class="text-info text-sm-right font-weight-light font-italic">
+          Posted by {% if post.author %}{{ post.author }}{% else %}{{ site.author }}{% endif %} on {{ post.date | date: "%B %-d, %Y" }}
+        </p>
+      </a>
+    </div>
+  {% endfor %}
+</section>

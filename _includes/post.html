@@ -1,0 +1,19 @@
+<div id="post" class="container pt-3">
+  <div class="row">
+    <div class="col">
+      <h2 class="text-capitalize">{{ page.title }}</h2>
+      <h4 class="font-italic">{{ page.subtitle }}</h4>
+      <p class="font-weight-normal text-info">
+        {{ page.date | date: "%b %-d, %Y" }}
+        <span class="tags float-right">
+          {% for tag in page.tags %}
+            <a class="tag align-middle" href="{{ site.baseurl }}/archive/?tag={{ tag | url_encode }}" title="{{ tag }}">{{ tag }}</a>
+          {% endfor %}
+        </span>
+      </p>
+      <article class="pt-5">
+        {{ content }}
+      </article>
+    </div>
+  </div>
+</div>

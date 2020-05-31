@@ -1,0 +1,63 @@
+#post {
+  h1, h2, h3, h4 {
+    color: $primary;
+  }
+  img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 12px 12px 3px rgba(34, 25, 25, 0.4);
+    -moz-box-shadow: 12px 12px 3px rgba(34, 25, 25, 0.4);
+    -webkit-box-shadow: 12px 12px 3px rgba(34, 25, 25, 0.4);
+    margin-top: 20px;
+    margin-bottom: 40px;
+  }
+  /******************************
+   * STYLES FOR DISPLAYING CODE
+   ******************************/
+  // heading style for a code section
+  h6 {
+    background: none repeat scroll 0% 0% $code-heading-background;
+    font-family: monospace;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 5px 10px;
+    margin-bottom: 0px;
+    border-radius: 6px 6px 0px 0px;
+  }
+
+  // main code section style
+  .highlight {
+    border-radius: 0px 0px 6px 6px;
+    pre {
+      font-size: 16px;
+      padding: 10px;
+      code {
+        font-family: "Courier", "Lucida Sans Typewriter";
+        color: $code-text-color;
+      }
+    }
+  }
+
+  .code-block-without-title {
+    border-radius: 6px !important;
+    .highlight {
+      border-radius: 6px !important;
+    }
+  }
+  
+  // copy btn style
+  .btn-copy-code {
+    color: $gray-900;
+    padding-right: 5px;
+    float: right;
+    background: $code-heading-background;
+    border: 0;
+    margin-top: -26px;
+    margin-right: 10px;
+    &:hover {
+      cursor: pointer;
+      color: $primary;
+    }
+  }
+}

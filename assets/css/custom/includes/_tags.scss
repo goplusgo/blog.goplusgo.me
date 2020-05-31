@@ -1,0 +1,22 @@
+.tags {
+  margin-bottom: -5px;
+
+  a {
+    display: inline-block;
+    border: 1px solid $primary;
+    border-radius: 999em;
+    padding: 0 10px 0 10px;
+    margin-right: 5px;
+    color: $primary !important;
+    line-height: 24px;
+    font-size: 12px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  a:hover,
+  a:active {
+    color: $white !important;
+    background-color: $primary;
+  }
+}

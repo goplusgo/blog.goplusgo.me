@@ -1,0 +1,14 @@
+#posts {
+  a {
+    text-decoration: none;
+    &:hover {
+      color: $info;
+    }
+  }
+  .post-content-preview {
+    color: $secondary;
+    &:hover {
+      color: $info;
+    }
+  }
+}

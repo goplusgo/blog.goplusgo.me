@@ -1,0 +1,82 @@
+<!--
+Credits to: https://github.com/Huxpro/huxpro.github.io
+-->
+<section id="archive">
+  <div class="container">
+    <!-- Tags -->
+    <div class="row">
+      <div class="col">
+        <h2 class="text-primary">Tags</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="tags js-tags">
+          <a class="tag tag-all" data-encode="">
+            Show All
+            <sup>{{site.posts.size}}</sup>
+          </a>
+          {% capture tags %}
+          {% for tag in site.tags %}
+            <a class="tag"
+            data-sort="{{ site.posts.size | minus: tag[1].size | prepend: '0000' | slice: -4, 4 }}"
+            data-encode="{{ tag[0] | strip | url_encode }}"
+            title="{{ tag[0] }}"
+            rel="{{ tag[1].size }}">
+              {{ tag[0] }}
+              <sup>{{tag[1].size}}</sup>
+            </a>__SEPERATOR__
+          {% endfor %}
+          {% endcapture %}
+          {{ tags | split:'__SEPERATOR__' | sort }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Post List -->
+    <div class="row js-result">
+      <div class="col">
+      {%- assign _sorted_list = site.posts | sort: 'date' | reverse -%}
+
+      {%- for _article in _sorted_list -%}
+        {%- assign _tags = '' -%}
+        {%- for _tag in _article.tags -%}
+          {%- assign _tag_encode = _tag | strip | url_encode -%}
+          {%- if forloop.last -%}
+            {%- assign _tags = _tags | append: _tag_encode -%}
+          {%- else -%}
+            {%- assign _tags = _tags | append: _tag_encode | append: ',' -%}
+          {%- endif -%}
+        {%- endfor -%}
+
+        {% comment %} group by year {% endcomment %}
+        {%- assign _currentdate = _article.date | date: '%Y' -%}
+        
+        {%- if _currentdate != _date -%}
+          {%- unless forloop.first -%}</section>{%- endunless -%}
+          <section>
+          <span>
+            <h3 class="lead text-primary">{{ _currentdate }}</h3>
+          </span>
+          {%- assign _date = _currentdate -%}
+        {%- endif -%}
+
+        <div class="post-preview item" data-tags="{{ _tags }}">
+            <a href="{{ _article.url | prepend: site.baseurl }}">
+              <h4 class="post-title">
+                {{ _article.title }}
+              </h4>
+              {% if _article.subtitle %}
+              <h5 class="post-subtitle">
+                {{ _article.subtitle }}
+              </h5>
+              {% endif %}
+            </a>
+          <hr>
+        </div>
+        {%- if forloop.last -%}</section>{%- endif -%}
+        {% endfor %}
+        </div>
+      </div>
+    </div>
+</section>
