@@ -7,6 +7,25 @@ tags: [Kubernetes, Shell Scripts]
 
 Kuberntes is becoming more and more popular in application deployment and management as a container-orchestration system. Below are some of the useful shell scripts or commands that can be used in Kubernetes world based on my daily experience.
 
+#### Providing pod spec from command line
+
+###### command
+```shell
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: Pod
+metadata:
+  name: <POD_NAME>
+spec:
+  containers:
+  - name: <CONTAINER_NAME>
+    image: <DOCKER_IMAGE>
+    args:
+      - sleep
+      - "1000000"
+EOF
+```
+
 #### Running a command in a specified pod
 
 ###### command
