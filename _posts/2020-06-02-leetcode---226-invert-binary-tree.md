@@ -6,12 +6,8 @@ tags: [LeetCode, Algorithm]
 ---
 
 Multple solutions for leetcode 226. Invert Binary Tree.
-##### Trivia:
-This problem was inspired by this original tweet by Max Howell:
-> Google: 90% of our engineers use the software you wrote (Homebrew), but you can’t invert a binary tree on a whiteboard so f*** off.
-
-### Problem
-#### Example:
+#### Problem
+##### Example:
 Input:
 ```
      4
@@ -36,7 +32,7 @@ This problem was inspired by this original tweet by Max Howell:
 
 > Google: 90% of our engineers use the software you wrote (Homebrew), but you can’t invert a binary tree on a whiteboard so f*** off.
 
-### My solution - DFS
+#### My solution - DFS
 
 ```java
 public TreeNode invertTree(TreeNode root) {
@@ -54,7 +50,7 @@ public TreeNode invertTree(TreeNode root) {
 
 This solution is pretty straigtforward. It's simple and easy to understand. However, this DFS solution might have the risk of stack overflow. Therefore, there're some other approaches use iteration instead of recursion.
 
-### Iteration using stack
+#### Iteration using stack
 
 ```java
 public TreeNode invertTree(TreeNode root) {
@@ -83,7 +79,7 @@ public TreeNode invertTree(TreeNode root) {
 }
 ```
 
-### BFS using queue
+#### BFS using queue
 
 ```java
 public TreeNode invertTree(TreeNode root) {
