@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "everything you need to know about AWS assume role"
+title: "Everything you need to know about AWS assume role"
 tags: [AWS, AWS STS]
 ---
 
