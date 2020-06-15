@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Pitfalls in GitLab"
+title: "GitLab Traps and Pitfalls"
 tags: [GitLab]
 ---
 
@@ -23,8 +23,42 @@ Apparently, GitLab hasn't yet adopted the philosophy of Java exception handling:
 Of cause, lots of developers are long for this feature, see [Ensure after_script is called for cancelled and timed out pipelines](https://gitlab.com/gitlab-org/gitlab/-/issues/15603).
 
 #### 2. Artifacts Might Be Gone
-[GitLab artifacts](https://docs.gitlab.com/ee/ci/pipelines/job_artifacts.html) are a list of files and directories created by a job once it finishes. It acted like the shared folder between stages. Sometimes, we need to save some info in the artifacts from the previous stage and would like to read those info in the next stage. However, by default, the artifacts will be passed to the next stage. 
+[GitLab artifacts](https://docs.gitlab.com/ee/ci/pipelines/job_artifacts.html) are a list of files and directories created by a job once it finishes. It acted like the shared folder between stages. Sometimes, we need to save some info in the artifacts from the previous stage and would like to read those info in the next stage. For instance, we have a stage called `install` where we provision EC2 instance and install our system. 
 
-We need to manually specify the previous stage/job as a dependency in the next stage/job, see this [stackoverflow post](https://stackoverflow.com/questions/38140996/how-can-i-pass-artifacts-to-another-stage).
+```yaml
+install:
+  script:
+    set up EC2 instance and install system
+  artifacts:
+    paths:
+    - instance_ip.txt
+```
 
-to be continued...
+And we would like to export its instance IP so that the next `smoketest` stage can know the endpoint to connect to:
+
+```yaml
+smoketest:
+  script:
+    - INSTANCE_IP=cat instance_ip.txt
+    - connect to INSTANCE_IP and run smoke test against to
+```
+
+However, by default, the artifacts will be passed to the next stage. We need to manually specify the previous stage/job as a dependency in the next stage/job, see this [stackoverflow post](https://stackoverflow.com/questions/38140996/how-can-i-pass-artifacts-to-another-stage). In other words, we need to modify the `smoketest` job as:
+
+```yaml
+smoketest:
+  script:
+    - INSTANCE_IP=cat instance_ip.txt
+    - connect to INSTANCE_IP and run smoke test against to
+  dependencies:
+    - install
+```
+
+#### 3. Retry Manual Job Won't Take Input Variables
+In GitLab, we can define the manual job in our CI/CD pipeline. And those manual jobs can take custom defined variables from input:
+<img src="/assets/images/gitlab_manual_job.png" width="80%"/>
+
+However, when you retry the manual job, the variables won't take effects. Resolution is still on the way, see [Specify variables when retrying a manual job](https://gitlab.com/gitlab-org/gitlab/-/issues/37268).
+
+
+
