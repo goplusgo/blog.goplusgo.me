@@ -40,3 +40,15 @@ Queue<List<Integer>> pq = new PriorityQueue<>(Comparator.comparingInt(k -> k.get
 List<String> list = Arrays.asList("Hello", "world");
 String result = list.stream().collect(Collectors.joining(" ")); // result: "Hello world"
 ```
+
+#### Add Map entries with value initialization
+```java
+Map<String, List<String>> map = new HashMap<>();
+map.computeIfAbsent(key, k -> new ArrayList<>()).add(value);
+```
+
+#### Get sum of an array
+```java
+int[] array = {1, 2, 3, 4};
+int sum = Arrays.stream(array).sum();
+```
